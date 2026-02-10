@@ -10,14 +10,17 @@ resources:
       cover: true
 videos:
   - url: https://vimeo.com/212408418
-    title: Chapelle Castrale [Geneviève Babe]
+    title: Geneviève Babe, peintre "Chapelle Castrale"
     date: 2017-05-01
   - url: https://vimeo.com/140595407
-    title: Les yeux dans les cieux
+    title: Thomas, pilote d'avion "Les yeux dans les cieux"
     date: 2015-10-01
   - url: https://www.youtube.com/watch?v=afcYZpqqviY
-    title: Monsieur Marco
+    title: "Monsieur Marco"
     date: 2016-06-01
+  - url: https://www.facebook.com/reel/1414596762053753
+    title: Achon, diaboliste "Le diabolo nomade"
+    date: 2020-03-17
 ---
 
 Portraits vidéo captant l'essence et la personnalité des sujets.

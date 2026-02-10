@@ -18,6 +18,14 @@ videos:
   - url: https://vimeo.com/161195982
     title: Qual - Construction bois
     date: 2016-03-01
+  - url: https://www.youtube.com/watch?v=VjTX2vNMEr8
+    title: Legendre - Les Marsauderies (timelapse long terme)
+    date: 2020-01-21
+  -url : https://www.youtube.com/watch?v=wjXPK3LdtDo
+    title: Groupe Giboire - Saint-Armel - La Minoterie
+    date: 2025-05-16
+
+
 ---
 
 Vidéos commerciales et timelapses pour entreprises, salons professionnels et projets de construction.

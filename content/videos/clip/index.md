@@ -10,11 +10,14 @@ resources:
       cover: true
 videos:
   - url: https://www.youtube.com/watch?v=kau_K_asQKQ
-    title: Jusqu'à (CLIP à Louvain-la-Neuve)
+    title: Martin Cravatte - Jusqu'à
     date: 2017-01-01
   - url: https://www.youtube.com/watch?v=buOTKcu__lY
     title: Edel Sheep - Flesh to Dust
     date: 2016-01-01
+  url: https://www.youtube.com/watch?v=Qd_VI8jbdzM 
+    title: John William Project - No Blood On My Dreams
+    date: 2021-07-11
 ---
 
 Clips musicaux mêlant créativité visuelle et ambiance musicale.
