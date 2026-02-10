@@ -17,8 +17,3 @@ N'hésitez pas à me contacter pour vos projets photo et vidéo.
 **Email :** [simon.cramar@gmail.com](mailto:simon.cramar@gmail.com)
 
 **Téléphone :** +33 7 69 49 40 28
-
-**Adresse :**
-31 Rue de la Pilate
-35136 Saint-Jacques de la Lande
-Bretagne, France
