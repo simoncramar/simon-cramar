@@ -15,13 +15,13 @@ videos:
   - url: https://vimeo.com/162323778
     title: Antoine Rose - Up In The Air - Sweden - Aerial Photography
     date: 2016-04-11
-  url: https://vimeo.com/173868344?fl=pl&fe=sh 
-    title: Carl Zeiss - Speed Riding Lofoten by Satori Factory (Original video : https://vimeo.com/168776379)
+  - url: https://vimeo.com/173868344
+    title: Carl Zeiss - Speed Riding Lofoten by Satori Factory (Original video https://vimeo.com/168776379)
     date: 2016-07-08
-  url: https://vimeo.com/167624207
+  - url: https://vimeo.com/167624207
     title: Roche Bobois - Shooting photo Dani Oshi Brussels
     date: 2016-05-22 
-  url: https://www.youtube.com/watch?v=tdwRGuFYaPM
+  - url: https://www.youtube.com/watch?v=tdwRGuFYaPM
     title: Clip de Martin Cravatte "Jusqu'à"
     date: 2016-09-15
 ---

@@ -21,7 +21,7 @@ videos:
   - url: https://www.youtube.com/watch?v=VjTX2vNMEr8
     title: Legendre - Les Marsauderies (timelapse long terme)
     date: 2020-01-21
-  -url : https://www.youtube.com/watch?v=wjXPK3LdtDo
+  - url : https://www.youtube.com/watch?v=wjXPK3LdtDo
     title: Groupe Giboire - Saint-Armel - La Minoterie
     date: 2025-05-16
 

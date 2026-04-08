@@ -1,3 +1,5 @@
 public/
 pull-images.sh
 resources/_gen/
+content/videos/clip/index.md
+.DS_Store

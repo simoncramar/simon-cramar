@@ -9,52 +9,21 @@ resources:
     params:
       cover: true
 videos:
-
-  -url: https://www.youtube.com/watch?v=nUbuLbZm_iU
-    title: Echelon 2022
-    date: 2022-02-01
-
-  -url: https://www.youtube.com/watch?v=D4NGv9nUMmA
-    title: JBL Snow Party 2019
-    date: 2019-05-15
-    
-  -url: https://www.youtube.com/watch?v=Ryonrj5INME
-    title: So W'happy 2025
-    date: 2025-09-04
-
-  -url: https://www.youtube.com/watch?v=LAsD13ca3-A 
-    title: Echelon 2019
-    date: 2022-01-05
-
-  -url: https://www.youtube.com/watch?v=lUddIdeW6wo
-    title: So W'Happy 2019
-    date: 2020-01-30
-
-  -url: 
-    title:
-    date: 
-
-  -url: https://www.youtube.com/watch?v=VMxuR65CwSg 
-    title: ImpaQt 2019
-    date: 2019-10-10
-
   - url: https://www.youtube.com/watch?v=CxVGaaxnpPI
-    title: Neversea 2019
+    title: Neversea 2019 | Official Aftermovie [4k]
     date: 2019-07-01
-
-  - url: https://www.facebook.com/proridebelgium/videos/1617590061694832
-    title: Proride 2018
+  - iframe: '<iframe src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fproridebelgium%2Fvideos%2F1617590061694832%2F&show_text=false&width=560&t=0" width="560" height="314" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowFullScreen="true"></iframe>'
+    title: Proride 2018 - Official Aftermovie
+    thumbnail: /images/proride-2018.jpg
     date: 2018-09-01
-
   - url: https://www.youtube.com/watch?v=LAsD13ca3-A
     title: Echelon
     date: 2014-09-01
   - url: https://www.youtube.com/watch?v=B7xkuq1Mk38
-    title: Open Beatz 2018 
+    title: Open Beatz Festival 2018 - Official Aftermovie
     date: 2018-08-01
-
   - url: https://www.youtube.com/watch?v=XHtQkmPt1-8
-    title: So W'Happy 2018
+    title: So W'Happy Festival 2018 - Official Aftermovie
     date: 2018-07-01
 ---
 

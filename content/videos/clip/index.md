@@ -15,7 +15,7 @@ videos:
   - url: https://www.youtube.com/watch?v=buOTKcu__lY
     title: Edel Sheep - Flesh to Dust
     date: 2016-01-01
-  url: https://www.youtube.com/watch?v=Qd_VI8jbdzM 
+  - url: https://www.youtube.com/watch?v=Qd_VI8jbdzM 
     title: John William Project - No Blood On My Dreams
     date: 2021-07-11
 ---
