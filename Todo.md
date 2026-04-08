@@ -1,0 +1,1 @@
+- Mettre la vidéo wix sur Youtube dans layouts/_default/home.html ligne 122
