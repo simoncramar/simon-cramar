@@ -16,9 +16,9 @@ title = "Simon Cramar - Photographe et Vidéaste"
     name = "Simon Cramar"
   [params.socialIcons]
     email = "mailto:simon.cramar@gmail.com"
-    youtube = "https://www.youtube.com/@simoncramar"
-    #facebook = "https://www.facebook.com/"
-    #instagram = "https://www.instagram.com/"
+    youtube = "https://www.youtube.com/@simoncramar/"
+    #facebook = "https://www.facebook.com/simoncramar/"
+    #instagram = "https://www.instagram.com/simoncramar/"
   [params.gallery]
     boxSpacing = 8
     targetRowHeight = 288

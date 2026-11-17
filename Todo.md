@@ -1,1 +1,1 @@
-- Mettre la vidéo wix sur Youtube dans layouts/_default/home.html ligne 122
+- Mettre la vidéo wix sur Youtube dans layouts/_default/home.html ligne 122 à faire commencer à 00:28

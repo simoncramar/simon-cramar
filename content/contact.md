@@ -1,18 +1,13 @@
 ---
 title: Contact
-description: Contactez Simon Cramar
+description: 
 layout: prose
 menus:
   main:
-    name: Contact
+    name: 
     weight: 3
 ---
 
-# Contact
-
-N'hésitez pas à me contacter pour vos projets photo et vidéo.
-
-## Coordonnées
 
 **Email :** [simon.cramar@gmail.com](mailto:simon.cramar@gmail.com)
 

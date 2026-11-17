@@ -30,7 +30,7 @@ videos:
     title: Groupe Giboire - Saint-Armel - La Minoterie [Réalisation - Cadrage - Timelapse long terme - Drone - Montage]
     date: 2025-05-16
 
-  - url: https://www.youtube.com/watch?v=u08LPo7hiT0&t=2s
+  - url: https://www.youtube.com/watch?v=u08LPo7hiT0
     title: Ville des Mureaux, De la Tour Corneille à l’EcoQuartier Molière. Timelapse sur plusieurs mois avec un boitier Photosentinnel [Réalisation - Timelapse long terme - Montage]
     date: 2020-03-20
 

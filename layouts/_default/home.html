@@ -122,15 +122,60 @@
   </video>
   <div class="video-hero-overlay">
     <div class="video-hero-text">
-      <h1 class="hero-name">SIMON CRAMAR</h1>
-      <p class="hero-roles">RÉALISATEUR | CADREUR | MONTEUR</p>
+      <h1 class="hero-name">SIMON CRAMAR </h1>
+      <p class="hero-roles">VIDEASTE | PILOTE DE DRONE | EXPERT TIMELAPSE & HYPERLAPSE</p>
     </div>
   </div>
 </div>
 
+
+
+
 <div class="featured-section">
-  <h2>Travaux Récents</h2>
+  <h2>REALISATIONS</h2>
   {{ $featured := where .Site.RegularPages "Section" "videos" | first 6 }}
+  {{ if $featured }}
+    <section class="galleries">
+      {{ range $featured }}
+        {{ partial "album-card.html" . }}
+      {{ end }}
+    </section>
+  {{ end }}
+
+
+
+<div style="padding: 15rem 0; text-align: center;">
+  
+  <p style="font-size: 25px; letter-spacing: 0.1em; text-transform: uppercase; margin: 0 0 1.5rem;">Ils me font confiance !</p>
+  <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem 3rem; border-top: 0.5px solid rgb(255, 255, 255); border-bottom: 0.5px solid rgb(255, 255, 255); padding: 1.5rem 1rem;">
+      
+      <img src="/images/logos-clients/Logo_SNCF.png" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/RedBull.jpeg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Biocoop.png" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Electra.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Croisieurope.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/euronews.svg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Giboire.svg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Grand Est.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/JBL.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Legendre.png" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Rennes Métropole.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Logo Skoda.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Roche bobois Paris.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Sodebo.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Space.jpg" alt="Client 3" style="height: 64px;" />
+      <img src="/images/logos-clients/Zeiss.png" alt="Client 3" style="height: 64px;" />    
+  </div>
+</div>
+
+  <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem 3rem; border-top: 0.5px solid rgb(255, 255, 255); border-bottom: 0.5px solid rgb(255, 255, 255); padding: 1.5rem 1rem;"></div>
+
+
+
+  <div style="display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 2rem 3rem; border-top: 0.5px solid rgb(255, 255, 255); border-bottom: 0.5px solid rgb(255, 255, 255); padding: 1.5rem 1rem;"></div>
+  <h2>EXPERTISES</h2>
+  </div>
+  {{ $featured := where .Site.RegularPages "Section" "album-card" | first 6 }}
   {{ if $featured }}
     <section class="galleries">
       {{ range $featured }}
