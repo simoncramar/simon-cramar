@@ -1,0 +1,31 @@
+{{/* Expects: roles, techniques, secteurs (slices of {slug, label}) */}}
+{{ with .roles }}
+  <div class="portfolio-filters__group">
+    <p class="portfolio-filters__label">Rôle</p>
+    <div class="portfolio-filters__chips" data-filter-group="roles">
+      {{ range . }}
+        <button type="button" class="portfolio-chip" data-filter="{{ .slug }}" aria-pressed="false">{{ .label }}</button>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+{{ with .techniques }}
+  <div class="portfolio-filters__group">
+    <p class="portfolio-filters__label">Technique</p>
+    <div class="portfolio-filters__chips" data-filter-group="technique">
+      {{ range . }}
+        <button type="button" class="portfolio-chip" data-filter="{{ .slug }}" aria-pressed="false">{{ .label }}</button>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+{{ with .secteurs }}
+  <div class="portfolio-filters__group">
+    <p class="portfolio-filters__label">Secteur</p>
+    <div class="portfolio-filters__chips" data-filter-group="secteurs">
+      {{ range . }}
+        <button type="button" class="portfolio-chip" data-filter="{{ .slug }}" aria-pressed="false">{{ .label }}</button>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}

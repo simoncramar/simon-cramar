@@ -1,12 +1,12 @@
 {{ define "main" }}
-  {{ $wantedRoles := .Params.expertise_roles | default slice }}
+  {{ $wantedTechniques := .Params.expertise_roles | default slice }}
   {{ $matched := slice }}
-  {{ range where .Site.RegularPages "Section" "videos" }}
+  {{ with site.GetPage "section" "videos" }}
     {{ range .Params.videos }}
       {{ $video := . }}
       {{ $hit := false }}
-      {{ range $wantedRoles }}
-        {{ if in ($video.roles | default slice) . }}
+      {{ range $wantedTechniques }}
+        {{ if in ($video.technique | default slice) . }}
           {{ $hit = true }}
         {{ end }}
       {{ end }}
@@ -15,6 +15,7 @@
       {{ end }}
     {{ end }}
   {{ end }}
+  {{ $matched = sort $matched "date" "desc" }}
 
   <section class="expertise-split{{ if not $matched }} expertise-split--solo{{ end }}">
     <aside class="expertise-split__aside">
@@ -31,7 +32,7 @@
 
     {{ if $matched }}
       <div class="expertise-split__media">
-        {{ partial "videos-grid.html" (dict "videos" $matched "galleryId" (printf "expertise-%s" (.File.ContentBaseName | urlize))) }}
+        {{ partial "videos-grid.html" (dict "videos" $matched "galleryId" (printf "expertise-%s" (.File.ContentBaseName | urlize)) "singleColumn" true) }}
       </div>
     {{ end }}
   </section>

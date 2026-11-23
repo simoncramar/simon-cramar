@@ -1,8 +1,13 @@
-{{/* Expects .videos (slice) and optional .galleryId */}}
+{{/* Expects .videos (slice), optional .galleryId and .singleColumn */}}
 {{ $galleryId := .galleryId | default "gallery" }}
 {{ $videos := .videos | default slice }}
+{{ $singleColumn := .singleColumn | default false }}
 <section class="gallery">
-  <div id="{{ $galleryId }}" class="gallery-grid gallery-grid--pending">
+  <div
+    id="{{ $galleryId }}"
+    class="gallery-grid gallery-grid--pending{{ if $singleColumn }} gallery-grid--single{{ end }}"
+    {{ if $singleColumn }}data-single-column="true"{{ end }}
+  >
     {{ range $videos }}
       {{ partial "video-item.html" . }}
     {{ end }}

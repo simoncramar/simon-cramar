@@ -1,12 +1,20 @@
-{{/* Expects a video dict with url, title, roles, secteurs, tags, thumbnail, iframe */}}
+{{/* Expects a video dict with url, title, roles, technique, secteurs, thumbnail, iframe */}}
 {{ $title := .title | default "Video" }}
 {{ $videoUrl := trim (.url | default "") " " }}
 {{ $thumbnailUrl := "" }}
 {{ $youtubeId := "" }}
 {{ $roles := .roles | default slice }}
+{{ $techniques := .technique | default slice }}
 {{ $secteurs := .secteurs | default slice }}
 {{ $rolesStr := delimit $roles " " }}
+{{ $techniquesStr := delimit $techniques " " }}
 {{ $secteursStr := delimit $secteurs " " }}
+{{ $roleLabels := dict
+  "realisation" "Réalisation"
+  "cadrage" "Cadrage"
+  "montage" "Montage"
+}}
+
 
 {{ with .thumbnail }}
   {{ $thumbnailUrl = . }}
@@ -40,6 +48,7 @@
     data-height="50.625vw"
     data-target="{{ $title | urlize }}"
     data-roles="{{ $rolesStr }}"
+    data-technique="{{ $techniquesStr }}"
     data-secteurs="{{ $secteursStr }}"
     title="{{ $title }}"
   >
@@ -49,6 +58,7 @@
     href="{{ $videoUrl }}"
     data-target="{{ $title | urlize }}"
     data-roles="{{ $rolesStr }}"
+    data-technique="{{ $techniquesStr }}"
     data-secteurs="{{ $secteursStr }}"
     title="{{ $title }}"
     {{ with $thumbnailUrl }}data-poster="{{ . }}"{{ end }}
@@ -79,12 +89,14 @@
         </svg>
       </div>
     {{ end }}
-    {{ with .tags }}
+    {{ with $roles }}
       <ul class="gallery-item__tags">
         {{ range . }}
-          <li class="gallery-item__tag">{{ . }}</li>
+          <li class="gallery-item__tag">{{ index $roleLabels . | default (humanize .) }}</li>
         {{ end }}
       </ul>
     {{ end }}
+
+    <figcaption class="gallery-item__title">{{ $title }}</figcaption>
   </figure>
 </a>

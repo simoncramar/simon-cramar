@@ -53,11 +53,35 @@ const initGallery = (gallery) => {
       return;
     }
 
+    const spacing = Number.isInteger(params.boxSpacing) ? params.boxSpacing : 8;
+    const singleColumn = gallery.dataset.singleColumn === "true";
+
+    if (singleColumn) {
+      let top = 0;
+      visibleItems.forEach((item) => {
+        const ratio = getAspectRatio(item);
+        const boxWidth = containerWidth;
+        const height = boxWidth / ratio;
+        item.style.position = "absolute";
+        item.style.width = boxWidth + "px";
+        item.style.height = height + "px";
+        item.style.top = top + "px";
+        item.style.left = "0px";
+        item.style.overflow = "hidden";
+        top += height + spacing;
+      });
+
+      gallery.style.position = "relative";
+      gallery.style.height = Math.max(0, top - spacing) + "px";
+      gallery.classList.remove("gallery-grid--pending");
+      return;
+    }
+
     const aspectRatios = visibleItems.map(getAspectRatio);
 
     const layout = justifiedLayout(aspectRatios, {
       rowWidth: containerWidth,
-      spacing: Number.isInteger(params.boxSpacing) ? params.boxSpacing : 8,
+      spacing,
       rowHeight: params.targetRowHeight || 288,
       heightTolerance: Number.isInteger(params.targetRowHeightTolerance)
         ? params.targetRowHeightTolerance

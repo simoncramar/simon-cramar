@@ -63,17 +63,18 @@ title = "Simon Cramar - Photographe et Vidéaste"
     url = "/hyperlapse/"
     weight = 30
   [[menu.main]]
-    name = "Me contacter"
-    url = "/contact/"
-    weight = 40
-    [menu.main.params]
-      cta = true
-  [[menu.main]]
     name = "Portfolio"
     url = "/videos/"
+    weight = 40
+    [menu.main.params]
+      spaced = true
+  [[menu.main]]
+    name = "Contact"
+    url = "/contact/"
     weight = 100
     [menu.main.params]
       placement = "bottom"
+      cta = true
 [services]
   [services.rss]
     limit = 100

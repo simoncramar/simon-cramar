@@ -4,7 +4,10 @@
   <div class="menu-backdrop" id="menu-backdrop" hidden></div>
   <menu id="menu" aria-hidden="true">
     {{ range $top }}
-      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement"{{ if .Params.cta }} class="menu-item--cta"{{ end }}>
+      {{ $classes := slice }}
+      {{ if .Params.cta }}{{ $classes = $classes | append "menu-item--cta" }}{{ end }}
+      {{ if .Params.spaced }}{{ $classes = $classes | append "menu-item--spaced" }}{{ end }}
+      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement"{{ with $classes }} class="{{ delimit . " " }}"{{ end }}>
         <a
           class="{{ if .Params.cta }}menu-cta{{ end }}"
           aria-current="{{ or (page.IsMenuCurrent .Menu .) (page.HasMenuCurrent .Menu .) }}"
@@ -18,8 +21,15 @@
     {{ with $bottom }}
       <li class="menu-spacer" aria-hidden="true"></li>
       {{ range . }}
-        <li itemscope itemtype="http://www.schema.org/SiteNavigationElement" class="menu-item--bottom">
-          <a aria-current="{{ or (page.IsMenuCurrent .Menu .) (page.HasMenuCurrent .Menu .) }}" href="{{ .URL }}" itemprop="url">
+        {{ $classes := slice "menu-item--bottom" }}
+        {{ if .Params.cta }}{{ $classes = $classes | append "menu-item--cta" }}{{ end }}
+        <li itemscope itemtype="http://www.schema.org/SiteNavigationElement" class="{{ delimit $classes " " }}">
+          <a
+            class="{{ if .Params.cta }}menu-cta{{ end }}"
+            aria-current="{{ or (page.IsMenuCurrent .Menu .) (page.HasMenuCurrent .Menu .) }}"
+            href="{{ .URL }}"
+            itemprop="url"
+          >
             <span itemprop="name">{{ .Name }}</span>
           </a>
         </li>
