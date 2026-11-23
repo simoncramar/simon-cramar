@@ -1,3 +1,3 @@
 [submodule "themes/gallery"]
 	path = themes/gallery
-	url = git@github.com:quentinorh/hugo-theme-gallery-video.git
+	url = https://github.com/simoncramar/hugo-theme-gallery-video
