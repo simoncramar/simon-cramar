@@ -4,70 +4,64 @@
 {{ end }}
 
 {{ define "main" }}
+{{ $ctaLabel := .Params.cta_label | default "Me contacter" }}
+{{ $heroVideo := .Params.hero_video }}
+
 <div class="video-hero">
-  <video autoplay muted loop playsinline>
-    <source src="https://video.wixstatic.com/video/3c900a_8f3096d9dbb24e37a15395efd6af83c9/1080p/mp4/file.mp4" type="video/mp4">
-  </video>
+  {{ with $heroVideo }}
+    <video autoplay muted loop playsinline>
+      <source src="{{ . }}" type="video/mp4">
+    </video>
+  {{ end }}
   <div class="video-hero-overlay">
     <div class="video-hero-text">
-      <h1 class="hero-name">SIMON CRAMAR </h1>
-      <p class="hero-roles">DRONE - TIMELAPSE - HYPERLAPSE</p>
-      <a class="btn-cta" href="{{ "/contact/" | relURL }}">Me contacter</a>
+      {{ with .Params.hero_name }}
+        <h1 class="hero-name">{{ . }}</h1>
+      {{ end }}
+      {{ with .Params.hero_roles }}
+        <p class="hero-roles">{{ . }}</p>
+      {{ end }}
+      <a class="btn-cta" href="{{ "/contact/" | relURL }}">{{ $ctaLabel }}</a>
     </div>
   </div>
 </div>
 
 <div class="featured-section">
-  {{ $defaultPreview := "https://video.wixstatic.com/video/3c900a_8f3096d9dbb24e37a15395efd6af83c9/1080p/mp4/file.mp4" }}
-  {{ $expertiseKeys := slice
-    (dict "path" "/drone/" "fallbackText" "Prenez de la hauteur et sublimez votre projet. Prises de vue aériennes 4K pour valoriser un chantier, un territoire ou un événement.")
-    (dict "path" "/timelapse/" "fallbackText" "Suivi de chantier ou œuvre d'art : j'installe, je suis, vous regardez le projet évoluer en temps réel.")
-    (dict "path" "/hyperlapse/" "fallbackText" "Le mouvement au service du récit. Hyperlapses dynamiques pour faire voyager le regard à travers vos espaces.")
-  }}
-
-  {{ range $expertiseKeys }}
-    {{ $key := . }}
-    {{ with $.Site.GetPage $key.path }}
-      {{ $preview := .Params.preview_mp4 | default $defaultPreview }}
-      {{ $text := .Params.teaser | default $key.fallbackText }}
-      <section class="expertise-teaser">
-        <h2 class="expertise-teaser__title">{{ .Title }}</h2>
-        <div class="expertise-teaser__grid">
-          <div class="expertise-teaser__media">
-            <div class="expertise-teaser__embed">
-              <video autoplay muted loop playsinline>
-                <source src="{{ $preview }}" type="video/mp4">
-              </video>
+  {{ range .Params.expertise_pages }}
+    {{ with $.Site.GetPage .path }}
+      {{ $page := . }}
+      {{ $preview := $page.Params.preview_mp4 | default $heroVideo }}
+      {{ with $page.Params.teaser }}
+        <section class="expertise-teaser">
+          <h2 class="expertise-teaser__title">{{ $page.Title }}</h2>
+          <div class="expertise-teaser__grid">
+            <div class="expertise-teaser__media">
+              {{ with $preview }}
+                <div class="expertise-teaser__embed">
+                  <video autoplay muted loop playsinline>
+                    <source src="{{ . }}" type="video/mp4">
+                  </video>
+                </div>
+              {{ end }}
+            </div>
+            <div class="expertise-teaser__body">
+              <p>{{ . }}</p>
+              <a class="expertise-teaser__link" href="{{ $page.RelPermalink }}">En savoir plus</a>
             </div>
           </div>
-          <div class="expertise-teaser__body">
-            <p>{{ $text }}</p>
-            <a class="expertise-teaser__link" href="{{ .RelPermalink }}">En savoir plus</a>
-          </div>
-        </div>
-      </section>
+        </section>
+      {{ end }}
     {{ end }}
   {{ end }}
 
+  {{ with .Params.skills }}
   <section class="skills-section" aria-labelledby="skills-heading">
-    <h2 id="skills-heading" class="skills-section__title">Mes outils et compétences</h2>
-    <p class="skills-section__tagline">Dévoiler l’invisible</p>
+    <h2 id="skills-heading" class="skills-section__title">{{ $.Params.skills_title | default "Mes outils et compétences" }}</h2>
+    {{ with $.Params.skills_tagline }}
+      <p class="skills-section__tagline">{{ . }}</p>
+    {{ end }}
     <ul class="skills-grid">
-      {{ $skills := slice
-        (dict "title" "Pendant & après" "detail" "Suivi de chantier")
-        (dict "title" "Enlaps Tikee" "detail" "3 boîtiers autonomes")
-        (dict "title" "6K" "detail" "Résolution max")
-        (dict "title" "220°" "detail" "Angle de vue")
-        (dict "title" "5G + solaire" "detail" "Autonomie totale")
-        (dict "title" "Prendre de la hauteur" "detail" "Vue aérienne")
-        (dict "title" "Drone DJI" "detail" "Capteur 1″")
-        (dict "title" "4K / 50 Mpix" "detail" "Haute définition")
-        (dict "title" "4ème dimension" "detail" "Hyperlapse")
-        (dict "title" "Zhiyun 3 axes" "detail" "Gyrostabilisé")
-        (dict "title" "Espace-temps" "detail" "Timelapse")
-        (dict "title" "Rail Kessler" "detail" "Crane TLS 3 axes")
-      }}
-      {{ range $skills }}
+      {{ range . }}
         <li class="skills-grid__item">
           {{ range slice "tl" "tr" "bl" "br" }}
             <svg class="skills-grid__cross" data-corner="{{ . }}" width="17" height="17" viewBox="0 0 17 17" aria-hidden="true" focusable="false">
@@ -83,9 +77,13 @@
       {{ end }}
     </ul>
   </section>
+  {{ end }}
 
+  {{ with .Params.clients }}
   <div class="clients-section">
-    <p class="clients-section__title">Ils me font confiance !</p>
+    {{ with $.Params.clients_title }}
+      <p class="clients-section__title">{{ . }}</p>
+    {{ end }}
     <svg class="svg-filters" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <defs>
         <filter id="duotone-filter">
@@ -95,28 +93,19 @@
       </defs>
     </svg>
     <div class="client-logos">
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Logo_SNCF.png')"><img src="/images/logos-clients/Logo_SNCF.png" alt="SNCF" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/RedBull.jpeg')"><img src="/images/logos-clients/RedBull.jpeg" alt="Red Bull" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Biocoop.png')"><img src="/images/logos-clients/Biocoop.png" alt="Biocoop" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Electra.jpg')"><img src="/images/logos-clients/Electra.jpg" alt="Electra" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Croisieurope.jpg')"><img src="/images/logos-clients/Croisieurope.jpg" alt="Croisieurope" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/euronews.svg')"><img src="/images/logos-clients/euronews.svg" alt="Euronews" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Giboire.svg')"><img src="/images/logos-clients/Giboire.svg" alt="Giboire" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Grand%20Est.jpg')"><img src="/images/logos-clients/Grand Est.jpg" alt="Grand Est" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/JBL.jpg')"><img src="/images/logos-clients/JBL.jpg" alt="JBL" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Legendre.png')"><img src="/images/logos-clients/Legendre.png" alt="Legendre" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Rennes%20M%C3%A9tropole.jpg')"><img src="/images/logos-clients/Rennes Métropole.jpg" alt="Rennes Métropole" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Logo%20Skoda.jpg')"><img src="/images/logos-clients/Logo Skoda.jpg" alt="Skoda" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Roche%20bobois%20Paris.jpg')"><img src="/images/logos-clients/Roche bobois Paris.jpg" alt="Roche bobois Paris" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Sodebo.jpg')"><img src="/images/logos-clients/Sodebo.jpg" alt="Sodebo" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Space.jpg')"><img src="/images/logos-clients/Space.jpg" alt="Space" /></span>
-      <span class="client-logo" style="--logo: url('/images/logos-clients/Zeiss.png')"><img src="/images/logos-clients/Zeiss.png" alt="Zeiss" /></span>
+      {{ range . }}
+        {{ $src := .src | relURL }}
+        <span class="client-logo" style="--logo: url('{{ $src }}')"><img src="{{ $src }}" alt="{{ .alt }}" /></span>
+      {{ end }}
     </div>
   </div>
+  {{ end }}
 
   <div class="home-cta-footer">
-    <p class="home-cta-footer__text">Un projet en tête ?</p>
-    <a class="btn-cta" href="{{ "/contact/" | relURL }}">Me contacter</a>
+    {{ with .Params.footer_cta_text }}
+      <p class="home-cta-footer__text">{{ . }}</p>
+    {{ end }}
+    <a class="btn-cta" href="{{ "/contact/" | relURL }}">{{ $ctaLabel }}</a>
   </div>
 </div>
 {{ end }}

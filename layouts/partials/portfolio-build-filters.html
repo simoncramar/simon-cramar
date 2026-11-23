@@ -1,0 +1,67 @@
+{{/*
+  Construit les chips de filtres à partir du vocabulaire (.Params.filters)
+  et des slugs réellement utilisés dans .Params.videos.
+
+  Retourne : dict "roles" "techniques" "secteurs" (slices de {slug, label})
+*/}}
+{{ $filters := .Params.filters | default dict }}
+{{ $allVideos := .Params.videos | default slice }}
+
+{{ $foundRoles := dict }}
+{{ $foundTechniques := dict }}
+{{ $foundSecteurs := dict }}
+{{ range $allVideos }}
+  {{ range (.roles | default slice) }}
+    {{ $foundRoles = merge $foundRoles (dict . true) }}
+  {{ end }}
+  {{ range (.technique | default slice) }}
+    {{ $foundTechniques = merge $foundTechniques (dict . true) }}
+  {{ end }}
+  {{ range (.secteurs | default slice) }}
+    {{ $foundSecteurs = merge $foundSecteurs (dict . true) }}
+  {{ end }}
+{{ end }}
+
+{{ $roles := slice }}
+{{ $knownRoles := dict }}
+{{ range ($filters.roles | default slice) }}
+  {{ $knownRoles = merge $knownRoles (dict .slug true) }}
+  {{ if index $foundRoles .slug }}
+    {{ $roles = $roles | append (dict "slug" .slug "label" .label) }}
+  {{ end }}
+{{ end }}
+{{ range $slug, $ok := $foundRoles }}
+  {{ if and $ok (not (index $knownRoles $slug)) }}
+    {{ $roles = $roles | append (dict "slug" $slug "label" (humanize $slug)) }}
+  {{ end }}
+{{ end }}
+
+{{ $techniques := slice }}
+{{ $knownTechniques := dict }}
+{{ range ($filters.techniques | default slice) }}
+  {{ $knownTechniques = merge $knownTechniques (dict .slug true) }}
+  {{ if index $foundTechniques .slug }}
+    {{ $techniques = $techniques | append (dict "slug" .slug "label" .label) }}
+  {{ end }}
+{{ end }}
+{{ range $slug, $ok := $foundTechniques }}
+  {{ if and $ok (not (index $knownTechniques $slug)) }}
+    {{ $techniques = $techniques | append (dict "slug" $slug "label" (humanize $slug)) }}
+  {{ end }}
+{{ end }}
+
+{{ $secteurs := slice }}
+{{ $knownSecteurs := dict }}
+{{ range ($filters.secteurs | default slice) }}
+  {{ $knownSecteurs = merge $knownSecteurs (dict .slug true) }}
+  {{ if index $foundSecteurs .slug }}
+    {{ $secteurs = $secteurs | append (dict "slug" .slug "label" .label) }}
+  {{ end }}
+{{ end }}
+{{ range $slug, $ok := $foundSecteurs }}
+  {{ if and $ok (not (index $knownSecteurs $slug)) }}
+    {{ $secteurs = $secteurs | append (dict "slug" $slug "label" (humanize $slug)) }}
+  {{ end }}
+{{ end }}
+
+{{ return (dict "roles" $roles "techniques" $techniques "secteurs" $secteurs) }}

@@ -1,6 +1,51 @@
 ---
 title: PORTFOLIO
 description: Ensemble des réalisations vidéo
+layout: videos
+
+# Vocabulaire des filtres (slug = valeur utilisée sur chaque vidéo ; label = texte affiché).
+# L’ordre de la liste = ordre des chips. Seuls les slugs présents dans videos apparaissent.
+filters:
+  roles:
+    - slug: realisation
+      label: Réalisation
+    - slug: cadrage
+      label: Cadrage
+    - slug: montage
+      label: Montage
+  techniques:
+    - slug: video
+      label: Vidéo
+    - slug: timelapse
+      label: Timelapse
+    - slug: timelapse-long-terme
+      label: Timelapse long terme
+    - slug: hyperlapse
+      label: Hyperlapse
+    - slug: drone
+      label: Drone
+  secteurs:
+    - slug: btp
+      label: BTP
+    - slug: immobilier
+      label: Immobilier
+    - slug: chantier
+      label: Chantier
+    - slug: collectivites
+      label: Collectivités territoriales
+    - slug: tourisme
+      label: Tourisme
+    - slug: festival
+      label: Festival
+    - slug: evenements
+      label: Évènements
+    - slug: salon-exposition-art
+      label: Salon d'exposition art
+    - slug: science
+      label: Science
+    - slug: agriculture
+      label: Agriculture
+
 videos:
 
   - url: https://www.youtube.com/watch?v=Ryonrj5INME

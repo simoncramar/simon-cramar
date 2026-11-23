@@ -662,7 +662,15 @@ body > menu#menu .menu-item--bottom:not(.menu-item--cta) a[aria-current="true"] 
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 900px) {
+  .expertise-teaser__body {
+    align-items: flex-start;
+    text-align: left;
+  }
 }
 
 .expertise-teaser__body p {

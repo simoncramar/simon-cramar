@@ -550,6 +550,46 @@ La syntaxe d'intégration vidéo dépend de votre thème Hugo. Consultez la docu
 - Les mises en page de galerie vidéo
 :::
 
+### Filtres du portfolio (ce site)
+
+Sur ce site, le portfolio est géré dans **`content/videos.md`**. Les filtres (Rôle, Technique, Secteur) sont définis **dans le même fichier**, au début du frontmatter, sous la clé `filters`. Vous n’avez pas besoin d’éditer les templates.
+
+#### Définir ou renommer un filtre
+
+Ajoutez une entrée sous `filters.roles`, `filters.techniques` ou `filters.secteurs` :
+
+```yaml
+filters:
+  techniques:
+    - slug: drone
+      label: Drone
+    - slug: timelapse-long-terme
+      label: Timelapse long terme
+```
+
+- **`slug`** : identifiant technique (sans accents, espaces remplacés par `-`). C’est la valeur à coller sur chaque vidéo.
+- **`label`** : texte affiché sur le bouton de filtre.
+- **Ordre** : l’ordre de la liste YAML = ordre d’affichage des chips.
+- Seuls les slugs **réellement utilisés** sur au moins une vidéo apparaissent comme filtres.
+
+#### Tagger une vidéo
+
+Sur chaque entrée de `videos:`, reprenez exactement les slugs définis plus haut :
+
+```yaml
+videos:
+  - url: https://www.youtube.com/watch?v=exemple
+    title: Titre de la vidéo
+    roles: [realisation, cadrage]
+    technique: [drone, timelapse]
+    secteurs: [immobilier, chantier]
+    date: 2025-05-16
+```
+
+#### Pages expertise (Drone, Timelapse, Hyperlapse)
+
+Les pages `content/Drone.md`, `Timelapse.md`, `Hyperlapse.md` filtrent le portfolio via `expertise_roles`, qui doit utiliser les **mêmes slugs** que `filters.techniques` (ex. `expertise_roles: [drone]`).
+
 ### Vidéo HTML5 (Auto-hébergée)
 
 Si vous hébergez vous-même des fichiers vidéo :

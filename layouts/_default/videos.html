@@ -1,0 +1,63 @@
+{{ define "main" }}
+  {{ partial "title.html" . }}
+
+  {{ with .Content }}
+    <section class="prose">
+      {{ . }}
+    </section>
+  {{ end }}
+
+  {{ $allVideos := sort (.Params.videos | default slice) "date" "desc" }}
+  {{ $filterData := partial "portfolio-build-filters.html" . }}
+
+  <section class="portfolio" data-portfolio>
+    <div class="portfolio-filters" data-portfolio-filters>
+      {{ partial "portfolio-filters.html" $filterData }}
+    </div>
+
+    <p class="portfolio-empty" data-portfolio-empty hidden>Aucune vidéo ne correspond à ce filtre.</p>
+
+    {{ partial "videos-grid.html" (dict "videos" $allVideos "galleryId" "portfolio-gallery") }}
+
+    <button
+      class="filter-toggle"
+      id="filter-toggle"
+      type="button"
+      title="Filtres"
+      aria-label="Filtres"
+      aria-expanded="false"
+      aria-controls="filter-panel"
+    >
+      <svg class="icon-filter" width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round">
+          <!-- haut : piste courte à gauche, longue à droite -->
+          <line x1="3.5" y1="6" x2="6.2" y2="6"></line>
+          <line x1="12.2" y1="6" x2="20.5" y2="6"></line>
+          <!-- milieu : piste longue à gauche, courte à droite -->
+          <line x1="3.5" y1="12" x2="12.8" y2="12"></line>
+          <line x1="19" y1="12" x2="20.5" y2="12"></line>
+          <!-- bas : longueurs intermédiaires -->
+          <line x1="3.5" y1="18" x2="8" y2="18"></line>
+          <line x1="14.2" y1="18" x2="20.5" y2="18"></line>
+        </g>
+        <g fill="currentColor">
+          <circle cx="9.2" cy="6" r="2.45"></circle>
+          <circle cx="15.9" cy="12" r="2.45"></circle>
+          <circle cx="11.1" cy="18" r="2.45"></circle>
+        </g>
+      </svg>
+
+      <svg class="icon-close" width="24" height="24" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path clip-rule="evenodd" fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"></path>
+      </svg>
+    </button>
+
+    <div class="filter-backdrop" id="filter-backdrop" hidden></div>
+    <aside class="filter-panel" id="filter-panel" aria-hidden="true" aria-label="Filtres du portfolio">
+      <p class="filter-panel__title">Filtres</p>
+      <div class="filter-panel__filters">
+        {{ partial "portfolio-filters.html" $filterData }}
+      </div>
+    </aside>
+  </section>
+{{ end }}
