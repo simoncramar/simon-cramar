@@ -1,0 +1,46 @@
+{{ define "main" }}
+  {{ $email := .Params.email | default .Site.Params.author.email }}
+  {{ $phone := .Params.phone }}
+  {{ $phoneHref := .Params.phone_href | default (replaceRE "[^+0-9]" "" $phone) }}
+  {{ $portrait := .Params.portrait | default "/images/A propos/SimonN&BJohn.jpg" }}
+
+  <section class="contact-page">
+    <div class="contact-page__visual" aria-hidden="true">
+      <img src="{{ $portrait | relURL }}" alt="" />
+    </div>
+
+    <div class="contact-page__panel">
+      <p class="contact-page__eyebrow">Simon Cramar</p>
+      <h1 class="contact-page__title">{{ .Title }}</h1>
+
+      {{ with .Params.lead }}
+        <p class="contact-page__lead">{{ . }}</p>
+      {{ end }}
+
+      {{ with .Content }}
+        <div class="contact-page__intro">
+          {{ . }}
+        </div>
+      {{ end }}
+
+      <div class="contact-page__actions">
+        {{ with $email }}
+          <a class="contact-page__action" href="mailto:{{ . }}">
+            <span class="contact-page__action-label">Écrire un email</span>
+            <span class="contact-page__action-value">{{ . }}</span>
+          </a>
+        {{ end }}
+        {{ with $phone }}
+          <a class="contact-page__action" href="tel:{{ $phoneHref }}">
+            <span class="contact-page__action-label">Appeler</span>
+            <span class="contact-page__action-value">{{ . }}</span>
+          </a>
+        {{ end }}
+      </div>
+
+      {{ with .Params.note }}
+        <p class="contact-page__note">{{ . }}</p>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

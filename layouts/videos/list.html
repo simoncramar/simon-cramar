@@ -1,0 +1,64 @@
+{{ define "main" }}
+  {{ partial "title.html" . }}
+
+  {{ with .Content }}
+    <section class="prose">
+      {{ . }}
+    </section>
+  {{ end }}
+
+  {{ $roles := slice
+    (dict "slug" "realisation" "label" "Réalisation")
+    (dict "slug" "cadrage" "label" "Cadrage")
+    (dict "slug" "montage" "label" "Montage")
+    (dict "slug" "timelapse" "label" "Timelapse")
+    (dict "slug" "timelapse-long-terme" "label" "Timelapse long terme")
+    (dict "slug" "hyperlapse" "label" "Hyperlapse")
+    (dict "slug" "drone" "label" "Drone")
+  }}
+  {{ $secteurs := slice
+    (dict "slug" "btp" "label" "BTP")
+    (dict "slug" "immobilier" "label" "Immobilier")
+    (dict "slug" "chantier" "label" "Chantier")
+    (dict "slug" "collectivites" "label" "Collectivités territoriales")
+    (dict "slug" "tourisme" "label" "Tourisme")
+    (dict "slug" "festival" "label" "Festival")
+    (dict "slug" "evenements" "label" "Évènements")
+    (dict "slug" "salon-exposition-art" "label" "Salon d'exposition art")
+    (dict "slug" "science" "label" "Science")
+    (dict "slug" "agriculture" "label" "Agriculture")
+  }}
+
+  {{ $allVideos := slice }}
+  {{ range where .Pages "Params.private" "ne" true }}
+    {{ range .Params.videos }}
+      {{ $allVideos = $allVideos | append . }}
+    {{ end }}
+  {{ end }}
+
+  <section class="portfolio" data-portfolio>
+    <div class="portfolio-filters">
+      <div class="portfolio-filters__group">
+        <p class="portfolio-filters__label">Rôle</p>
+        <div class="portfolio-filters__chips" data-filter-group="roles">
+          {{ range $roles }}
+            <button type="button" class="portfolio-chip" data-filter="{{ .slug }}" aria-pressed="false">{{ .label }}</button>
+          {{ end }}
+        </div>
+      </div>
+      <div class="portfolio-filters__group">
+        <p class="portfolio-filters__label">Secteur</p>
+        <div class="portfolio-filters__chips" data-filter-group="secteurs">
+          {{ range $secteurs }}
+            <button type="button" class="portfolio-chip" data-filter="{{ .slug }}" aria-pressed="false">{{ .label }}</button>
+          {{ end }}
+        </div>
+      </div>
+      <button type="button" class="portfolio-filters__reset" data-filter-reset hidden>Réinitialiser</button>
+    </div>
+
+    <p class="portfolio-empty" data-portfolio-empty hidden>Aucune vidéo ne correspond à ce filtre.</p>
+
+    {{ partial "videos-grid.html" (dict "videos" $allVideos "galleryId" "portfolio-gallery") }}
+  </section>
+{{ end }}

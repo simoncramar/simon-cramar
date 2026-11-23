@@ -15,8 +15,8 @@ title = "Simon Cramar - Photographe et Vidéaste"
     email = "simon.cramar@gmail.com"
     name = "Simon Cramar"
   [params.socialIcons]
-    email = "mailto:simon.cramar@gmail.com"
-    youtube = "https://www.youtube.com/@simoncramar/"
+    #email = "mailto:simon.cramar@gmail.com"
+    #youtube = "https://www.youtube.com/@simoncramar/"
     #facebook = "https://www.facebook.com/simoncramar/"
     #instagram = "https://www.instagram.com/simoncramar/"
   [params.gallery]
@@ -42,12 +42,38 @@ title = "Simon Cramar - Photographe et Vidéaste"
     disableLatLong = true
     includeFields = "ImageDescription|Orientation"
 
-[menu]
-  [[menu.footer]]
-    name = "Contact"
-    url = "/contact/"
-    weight = 1
+# Invalide le cache CSS quand un fichier importé (ex. custom.css) change,
+# sinon hugo server détecte le changement sans recompiler le SCSS.
+[build]
+  [[build.cachebusters]]
+    source = 'assets/.*\.(js|ts|jsx|tsx|css|scss|sass)'
+    target = '(js|styles|css|scss|sass)'
 
+[menu]
+  [[menu.main]]
+    name = "Drone"
+    url = "/drone/"
+    weight = 10
+  [[menu.main]]
+    name = "Timelapse"
+    url = "/timelapse/"
+    weight = 20
+  [[menu.main]]
+    name = "Hyperlapse"
+    url = "/hyperlapse/"
+    weight = 30
+  [[menu.main]]
+    name = "Me contacter"
+    url = "/contact/"
+    weight = 40
+    [menu.main.params]
+      cta = true
+  [[menu.main]]
+    name = "Portfolio"
+    url = "/videos/"
+    weight = 100
+    [menu.main.params]
+      placement = "bottom"
 [services]
   [services.rss]
     limit = 100

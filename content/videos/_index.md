@@ -1,10 +1,4 @@
 ---
-title: Vidéos
-description: Portfolio vidéo - Aftermovies, commercials, clips et portraits
-menus:
-  main:
-    name: Vidéos
-    weight: 1
+title: PORTFOLIO
+description: Ensemble des réalisations vidéo — filtrez par rôle et secteur
 ---
-
-Découvrez mon travail vidéo dans différentes catégories : aftermovies de festivals, vidéos commerciales, clips musicaux et portraits.

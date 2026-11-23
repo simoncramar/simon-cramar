@@ -1,1 +1,10 @@
-<!-- Custom <head> tags (e.g. analytics code) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600&family=Syne:wght@500;600;700;800&display=swap" rel="stylesheet" />
+{{ with resources.Get "css/custom.css" }}
+  {{ $custom := . }}
+  {{ if hugo.IsProduction }}
+    {{ $custom = $custom | minify | fingerprint }}
+  {{ end }}
+  <link rel="stylesheet" href="{{ $custom.RelPermalink }}" />
+{{ end }}

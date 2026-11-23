@@ -1,0 +1,10 @@
+{{/* Expects .videos (slice) and optional .galleryId */}}
+{{ $galleryId := .galleryId | default "gallery" }}
+{{ $videos := .videos | default slice }}
+<section class="gallery">
+  <div id="{{ $galleryId }}" class="gallery-grid gallery-grid--pending">
+    {{ range $videos }}
+      {{ partial "video-item.html" . }}
+    {{ end }}
+  </div>
+</section>

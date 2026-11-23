@@ -1,0 +1,38 @@
+{{ define "main" }}
+  {{ $wantedRoles := .Params.expertise_roles | default slice }}
+  {{ $matched := slice }}
+  {{ range where .Site.RegularPages "Section" "videos" }}
+    {{ range .Params.videos }}
+      {{ $video := . }}
+      {{ $hit := false }}
+      {{ range $wantedRoles }}
+        {{ if in ($video.roles | default slice) . }}
+          {{ $hit = true }}
+        {{ end }}
+      {{ end }}
+      {{ if $hit }}
+        {{ $matched = $matched | append $video }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <section class="expertise-split{{ if not $matched }} expertise-split--solo{{ end }}">
+    <aside class="expertise-split__aside">
+      {{ with .Title }}
+        <h1 class="expertise-split__title">{{ . }}</h1>
+      {{ end }}
+      {{ with .Content }}
+        <div class="expertise-split__body prose">
+          {{ . }}
+        </div>
+      {{ end }}
+      <a class="btn-cta expertise-split__cta" href="{{ "/contact/" | relURL }}">Me contacter</a>
+    </aside>
+
+    {{ if $matched }}
+      <div class="expertise-split__media">
+        {{ partial "videos-grid.html" (dict "videos" $matched "galleryId" (printf "expertise-%s" (.File.ContentBaseName | urlize))) }}
+      </div>
+    {{ end }}
+  </section>
+{{ end }}

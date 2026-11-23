@@ -1,0 +1,29 @@
+{{ with site.Menus.main }}
+  {{ $top := where . "Params.placement" "ne" "bottom" }}
+  {{ $bottom := where . "Params.placement" "eq" "bottom" }}
+  <div class="menu-backdrop" id="menu-backdrop" hidden></div>
+  <menu id="menu" aria-hidden="true">
+    {{ range $top }}
+      <li itemscope itemtype="http://www.schema.org/SiteNavigationElement"{{ if .Params.cta }} class="menu-item--cta"{{ end }}>
+        <a
+          class="{{ if .Params.cta }}menu-cta{{ end }}"
+          aria-current="{{ or (page.IsMenuCurrent .Menu .) (page.HasMenuCurrent .Menu .) }}"
+          href="{{ .URL }}"
+          itemprop="url"
+        >
+          <span itemprop="name">{{ .Name }}</span>
+        </a>
+      </li>
+    {{ end }}
+    {{ with $bottom }}
+      <li class="menu-spacer" aria-hidden="true"></li>
+      {{ range . }}
+        <li itemscope itemtype="http://www.schema.org/SiteNavigationElement" class="menu-item--bottom">
+          <a aria-current="{{ or (page.IsMenuCurrent .Menu .) (page.HasMenuCurrent .Menu .) }}" href="{{ .URL }}" itemprop="url">
+            <span itemprop="name">{{ .Name }}</span>
+          </a>
+        </li>
+      {{ end }}
+    {{ end }}
+  </menu>
+{{ end }}

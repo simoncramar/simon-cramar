@@ -11,19 +11,31 @@ resources:
 videos:
 
   - url: https://www.youtube.com/watch?v=kau_K_asQKQ
-    title: Jusqu'à (CLIP à Louvain-la-Neuve) [Réalisation - Cadrage - Montage]
+    title: Jusqu'à (CLIP à Louvain-la-Neuve)
+    tags: [Réalisation, Cadrage, Montage]
+    roles: [realisation, cadrage, montage]
+    secteurs: [evenements]
     date: 2017-01-01
 
   - url: https://www.youtube.com/watch?v=buOTKcu__lY
-    title: Edel Sheep - Flesh to Dust [Cadrage]
+    title: Edel Sheep - Flesh to Dust
+    tags: [Cadrage]
+    roles: [cadrage]
+    secteurs: [evenements]
     date: 2016-01-01
 
   - url: https://www.youtube.com/watch?v=Qd_VI8jbdzM
-    title: John William Project - No Blood On My Dreams [Réalisation - Cadrage - Montage]
+    title: John William Project - No Blood On My Dreams
+    tags: [Réalisation, Cadrage, Montage]
+    roles: [realisation, cadrage, montage]
+    secteurs: [evenements]
     date: 2021-07-11
 
   - url: https://www.youtube.com/watch?v=0Fug-8Zv_tQ
-    title: Johann Le Guillerm - La Transumante en partenariat avec le Musée d’Art Moderne et le Palais de Tokyo [Réalisation - Cadrage - Montage]
+    title: Johann Le Guillerm - La Transumante en partenariat avec le Musée d’Art Moderne et le Palais de Tokyo
+    tags: [Réalisation, Cadrage, Montage]
+    roles: [realisation, cadrage, montage]
+    secteurs: [salon-exposition-art, evenements]
     date: 2018-06-18
 ---
 

@@ -1,0 +1,90 @@
+{{/* Expects a video dict with url, title, roles, secteurs, tags, thumbnail, iframe */}}
+{{ $title := .title | default "Video" }}
+{{ $videoUrl := trim (.url | default "") " " }}
+{{ $thumbnailUrl := "" }}
+{{ $youtubeId := "" }}
+{{ $roles := .roles | default slice }}
+{{ $secteurs := .secteurs | default slice }}
+{{ $rolesStr := delimit $roles " " }}
+{{ $secteursStr := delimit $secteurs " " }}
+
+{{ with .thumbnail }}
+  {{ $thumbnailUrl = . }}
+{{ else }}
+  {{ if or (in $videoUrl "youtube.com") (in $videoUrl "youtu.be") }}
+    {{ if in $videoUrl "youtube.com/watch?v=" }}
+      {{ $youtubeId = trim (replaceRE ".*[?&]v=([^&]+).*" "$1" $videoUrl) " " }}
+    {{ else if in $videoUrl "youtu.be/" }}
+      {{ $youtubeId = trim (replaceRE ".*youtu\\.be/([^?]+).*" "$1" $videoUrl) " " }}
+    {{ end }}
+    {{ if $youtubeId }}
+      {{ $thumbnailUrl = printf "https://img.youtube.com/vi/%s/maxresdefault.jpg" $youtubeId }}
+    {{ end }}
+  {{ else if in $videoUrl "vimeo.com" }}
+    {{ $vimeoId := replaceRE `.*\/([0-9]+)\/?$` `$1` $videoUrl }}
+    {{ if $vimeoId }}
+      {{ $thumbnailUrl = printf "https://vumbnail.com/%s.jpg" $vimeoId }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ if .iframe }}
+  {{ $inlineId := printf "glightbox-iframe-%s" ($title | urlize) }}
+  <div id="{{ $inlineId }}" class="glightbox-iframe-content">
+    {{ .iframe | safeHTML }}
+  </div>
+  <a
+    class="gallery-item gallery-item--video"
+    href="#{{ $inlineId }}"
+    data-width="90vw"
+    data-height="50.625vw"
+    data-target="{{ $title | urlize }}"
+    data-roles="{{ $rolesStr }}"
+    data-secteurs="{{ $secteursStr }}"
+    title="{{ $title }}"
+  >
+{{ else }}
+  <a
+    class="gallery-item gallery-item--video"
+    href="{{ $videoUrl }}"
+    data-target="{{ $title | urlize }}"
+    data-roles="{{ $rolesStr }}"
+    data-secteurs="{{ $secteursStr }}"
+    title="{{ $title }}"
+    {{ with $thumbnailUrl }}data-poster="{{ . }}"{{ end }}
+  >
+{{ end }}
+  <figure class="gallery-item__figure--video">
+    {{ if $thumbnailUrl }}
+      <img
+        class="lazyload gallery-item__media"
+        width="1280"
+        height="720"
+        data-src="{{ $thumbnailUrl }}"
+        {{ with $youtubeId }}
+          data-yt-id="{{ . }}"
+          data-thumb-fallback="https://img.youtube.com/vi/{{ . }}/hqdefault.jpg"
+        {{ end }}
+        alt="{{ $title }}"
+      />
+      <div class="gallery-item__play">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="white">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    {{ else }}
+      <div class="gallery-item__placeholder">
+        <svg width="80" height="80" viewBox="0 0 24 24" fill="white" opacity="0.8">
+          <path d="M8 5v14l11-7z"/>
+        </svg>
+      </div>
+    {{ end }}
+    {{ with .tags }}
+      <ul class="gallery-item__tags">
+        {{ range . }}
+          <li class="gallery-item__tag">{{ . }}</li>
+        {{ end }}
+      </ul>
+    {{ end }}
+  </figure>
+</a>
