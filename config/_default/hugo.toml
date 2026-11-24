@@ -69,6 +69,12 @@ title = "Simon Cramar - Photographe et Vidéaste"
     [menu.main.params]
       spaced = true
   [[menu.main]]
+    name = "À propos"
+    url = "/a-propos/"
+    weight = 90
+    [menu.main.params]
+      placement = "bottom"
+  [[menu.main]]
     name = "Contact"
     url = "/contact/"
     weight = 100

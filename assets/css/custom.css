@@ -86,6 +86,7 @@ body.home > main {
   height: auto;
   transform: translate(-50%, -50%);
   object-fit: cover;
+  animation: page-fade-in 1.2s ease-out both;
 }
 
 .video-hero-overlay {
@@ -117,6 +118,7 @@ body.home > main {
   letter-spacing: -0.03em;
   margin-bottom: 1rem;
   text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55);
+  animation: page-panel-in 0.85s ease-out 0.12s both;
 }
 
 .hero-roles {
@@ -126,10 +128,12 @@ body.home > main {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+  animation: page-panel-in 0.85s ease-out 0.26s both;
 }
 
 .video-hero .btn-cta {
   margin-top: 5rem;
+  animation: page-panel-in 0.85s ease-out 0.4s both;
 }
 
 .featured-section {
@@ -333,6 +337,7 @@ body > menu#menu .menu-cta[aria-current="true"] {
 }
 
 body > menu#menu .menu-item--bottom:not(.menu-item--cta) a {
+  border-bottom: 0;
   opacity: 0.72;
   font-size: 0.85em;
 }
@@ -701,6 +706,11 @@ body > menu#menu .menu-item--bottom:not(.menu-item--cta) a[aria-current="true"] 
 /* Portfolio filters */
 .portfolio {
   padding: 0 0 3rem;
+  animation: page-panel-in 0.8s ease-out 0.18s both;
+}
+
+body:has(.portfolio) hgroup {
+  animation: page-panel-in 0.8s ease-out both;
 }
 
 .portfolio-filters {
@@ -950,7 +960,44 @@ body.filter-panel-open {
   }
 }
 
+/* Hide scrollbars on contact / about / expertise pages (scroll still works) */
+html:has(.contact-page),
+html:has(.expertise-split),
+body:has(.contact-page),
+body:has(.expertise-split) {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html:has(.contact-page)::-webkit-scrollbar,
+html:has(.expertise-split)::-webkit-scrollbar,
+body:has(.contact-page)::-webkit-scrollbar,
+body:has(.expertise-split)::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
 /* Pages expertise : texte fixe à gauche, vidéos au scroll à droite */
+body:has(.expertise-split) > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: auto;
+  z-index: 20;
+  width: auto;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 0.5rem;
+  background: transparent;
+  pointer-events: none;
+}
+
+body:has(.expertise-split) > header a {
+  pointer-events: auto;
+}
+
 .expertise-split {
   display: grid;
   grid-template-columns: 1fr;
@@ -958,7 +1005,7 @@ body.filter-panel-open {
   width: 100%;
   max-width: 1480px;
   margin: 0 auto 4rem;
-  padding: 0 1.25rem 2rem;
+  padding: 4.5rem 1.25rem 4rem;
   align-items: start;
 }
 
@@ -966,7 +1013,7 @@ body.filter-panel-open {
   .expertise-split {
     grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
     gap: 3.5rem;
-    padding: 0 2rem 3rem;
+    padding: 0 2rem 4rem;
   }
 
   .expertise-split--solo {
@@ -975,11 +1022,22 @@ body.filter-panel-open {
 
   .expertise-split__aside {
     position: sticky;
-    top: 1.25rem;
-    max-height: calc(100vh - 2.5rem);
+    top: 0;
+    max-height: 100svh;
     overflow-y: auto;
+    padding-top: 4rem;
     padding-right: 0.5rem;
-    scrollbar-width: thin;
+    padding-bottom: 4rem;
+    box-sizing: border-box;
+    background: var(--surface-1, #0a0a0a);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .expertise-split__aside::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none;
   }
 }
 
@@ -987,6 +1045,7 @@ body.filter-panel-open {
   container-type: inline-size;
   container-name: expertise-aside;
   min-width: 0;
+  animation: page-panel-in 0.8s ease-out 0.12s both;
 }
 
 .expertise-split__title {
@@ -1045,6 +1104,7 @@ body.filter-panel-open {
 
 .expertise-split__media {
   min-width: 0;
+  animation: page-panel-in 0.9s ease-out 0.28s both;
 }
 
 .expertise-split__media > .gallery {
@@ -1057,11 +1117,11 @@ body.filter-panel-open {
 
 /* Contact page */
 body:has(.contact-page) {
-  --contact-header-offset: 4.5rem;
+  --contact-header-offset: 5.5rem;
 }
 
 body:has(.contact-page) > header {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -1114,7 +1174,7 @@ body:has(.contact-page) > main > .contact-page {
   height: 100%;
   object-fit: cover;
   object-position: center 42%;
-  animation: contact-visual-in 1.2s ease-out both;
+  animation: page-visual-in 1.2s ease-out both;
 }
 
 .contact-page__panel {
@@ -1123,11 +1183,15 @@ body:has(.contact-page) > main > .contact-page {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
   max-width: 34rem;
   margin: 0 auto;
-  padding: calc(var(--contact-header-offset) + 0.5rem) 1.5rem 3.5rem;
+  /* Image sits above on mobile — no need for header offset here */
+  padding: 2.5rem 1.5rem 4rem;
   text-align: center;
-  animation: contact-panel-in 0.8s ease-out 0.15s both;
+  animation: page-panel-in 0.8s ease-out 0.15s both;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .contact-page__eyebrow {
@@ -1144,11 +1208,18 @@ body:has(.contact-page) > main > .contact-page {
 .contact-page__title {
   margin: 0 0 0.5rem;
   font-family: var(--font-display);
-  font-size: clamp(2.75rem, 10vw, 4.75rem);
+  font-size: clamp(2.25rem, 10vw, 4.75rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 0.92;
   text-transform: uppercase;
+  max-width: 100%;
+}
+
+/* Fit title to one line within the panel (À propos, etc.) */
+.contact-page__title.is-fit {
+  white-space: nowrap;
+  max-width: none;
 }
 
 .contact-page__lead {
@@ -1233,7 +1304,17 @@ body:has(.contact-page) > main > .contact-page {
   line-height: 1.55;
 }
 
-@keyframes contact-visual-in {
+/* Shared page-load micro-animations (contact language) */
+@keyframes page-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes page-visual-in {
   from {
     opacity: 0;
     transform: scale(1.04);
@@ -1244,7 +1325,7 @@ body:has(.contact-page) > main > .contact-page {
   }
 }
 
-@keyframes contact-panel-in {
+@keyframes page-panel-in {
   from {
     opacity: 0;
     transform: translateY(1rem);
@@ -1259,10 +1340,13 @@ body:has(.contact-page) > main > .contact-page {
   .contact-page {
     grid-template-columns: minmax(0, 1.05fr) minmax(22rem, 0.95fr);
     min-height: 100svh;
-    align-items: stretch;
+    align-items: start;
   }
 
   .contact-page__visual {
+    position: sticky;
+    top: 0;
+    align-self: start;
     min-height: 100svh;
     height: 100svh;
   }
@@ -1286,7 +1370,7 @@ body:has(.contact-page) > main > .contact-page {
     max-width: none;
     min-height: 100svh;
     margin: 0;
-    padding: var(--contact-header-offset) 3.5rem 2rem 2.25rem;
+    padding: var(--contact-header-offset) 3.5rem 4rem 2.25rem; /* header offset + bottom breathing room */
     text-align: left;
   }
 
@@ -1296,6 +1380,14 @@ body:has(.contact-page) > main > .contact-page {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .video-hero video,
+  .hero-name,
+  .hero-roles,
+  .video-hero .btn-cta,
+  .expertise-split__aside,
+  .expertise-split__media,
+  body:has(.portfolio) hgroup,
+  .portfolio,
   .contact-page__visual img,
   .contact-page__panel {
     animation: none;
@@ -1307,6 +1399,66 @@ body:has(.contact-page) > main > .contact-page {
 
   .contact-page__action:hover {
     transform: none;
+  }
+}
+
+/* About page — same language as contact, text left / photo right */
+.contact-page--about .contact-page__title {
+  /* Starting size; data-fit-title JS keeps it on one line within the panel */
+  font-size: clamp(2.25rem, 14vw, 4.75rem);
+}
+
+.contact-page--about .contact-page__intro {
+  margin-bottom: 0;
+}
+
+.contact-page--about .contact-page__intro p {
+  margin: 0 0 1rem;
+}
+
+.contact-page--about .contact-page__intro p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-page--about .contact-page__cta {
+  display: flex;
+  width: fit-content;
+  margin-top: 2.25rem;
+  margin-inline: auto;
+  border-color: var(--text-1);
+  background: var(--text-1);
+  color: var(--surface-1, #000);
+}
+
+.contact-page--about .contact-page__cta:hover {
+  background: transparent;
+  color: var(--text-1);
+}
+
+@media (min-width: 900px) {
+  .contact-page--about {
+    grid-template-columns: minmax(22rem, 0.95fr) minmax(0, 1.05fr);
+  }
+
+  /* Keep DOM like contact (visual then panel) for mobile; swap on desktop */
+  .contact-page--about .contact-page__panel {
+    order: -1;
+    justify-content: center;
+    padding: var(--contact-header-offset) 2.25rem 4rem 3.5rem;
+  }
+
+  /* Mirror of contact: fade toward the text (left edge of the photo) */
+  .contact-page--about .contact-page__visual::after {
+    background: linear-gradient(
+      to left,
+      transparent 40%,
+      rgba(40, 40, 40, 0.4) 70%,
+      #111 100%
+    );
+  }
+
+  .contact-page--about .contact-page__visual img {
+    object-position: center 30%;
   }
 }
 

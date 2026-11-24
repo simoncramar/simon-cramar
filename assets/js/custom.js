@@ -1,3 +1,51 @@
+/* Scale page titles down so they stay on one line within their panel */
+function initFitTitles() {
+  const titles = Array.from(document.querySelectorAll("[data-fit-title]"));
+  if (!titles.length) return;
+
+  const fit = (el) => {
+    el.style.fontSize = "";
+    const maxPx = parseFloat(getComputedStyle(el).fontSize);
+    if (!maxPx) return;
+
+    // Block title takes the panel content width; compare text vs that box
+    const available = el.clientWidth;
+    if (!available) return;
+
+    el.style.fontSize = `${maxPx}px`;
+    if (el.scrollWidth <= available) return;
+
+    let lo = 12;
+    let hi = maxPx;
+    let best = lo;
+    while (hi - lo > 0.25) {
+      const mid = (lo + hi) / 2;
+      el.style.fontSize = `${mid}px`;
+      if (el.scrollWidth <= available) {
+        best = mid;
+        lo = mid;
+      } else {
+        hi = mid;
+      }
+    }
+    el.style.fontSize = `${best}px`;
+  };
+
+  const schedule = (el) => {
+    requestAnimationFrame(() => fit(el));
+  };
+
+  titles.forEach((el) => {
+    schedule(el);
+    if (typeof ResizeObserver === "undefined") return;
+    const parent = el.parentElement;
+    if (!parent) return;
+    new ResizeObserver(() => schedule(el)).observe(parent);
+  });
+
+  window.addEventListener("resize", () => titles.forEach(schedule), { passive: true });
+}
+
 /* Portfolio: un seul filtre à la fois + réorganisation dynamique de la grille */
 function initPortfolioFilters() {
   const root = document.querySelector("[data-portfolio]");
@@ -152,8 +200,13 @@ function initPortfolioFilters() {
   }
 }
 
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initPortfolioFilters);
-} else {
+function initCustom() {
+  initFitTitles();
   initPortfolioFilters();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initCustom);
+} else {
+  initCustom();
 }
