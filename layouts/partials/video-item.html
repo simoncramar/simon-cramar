@@ -10,7 +10,7 @@
 {{ $techniquesStr := delimit $techniques " " }}
 {{ $secteursStr := delimit $secteurs " " }}
 {{ $roleLabels := dict }}
-{{ with site.GetPage "/videos" }}
+{{ with site.GetPage "/portfolio" }}
   {{ range ((.Params.filters | default dict).roles | default slice) }}
     {{ $roleLabels = merge $roleLabels (dict .slug .label) }}
   {{ end }}

@@ -7,6 +7,7 @@
       {{ $classes := slice }}
       {{ if .Params.cta }}{{ $classes = $classes | append "menu-item--cta" }}{{ end }}
       {{ if .Params.spaced }}{{ $classes = $classes | append "menu-item--spaced" }}{{ end }}
+      {{ if .Params.divider }}{{ $classes = $classes | append "menu-item--divider" }}{{ end }}
       <li itemscope itemtype="http://www.schema.org/SiteNavigationElement"{{ with $classes }} class="{{ delimit . " " }}"{{ end }}>
         <a
           class="{{ if .Params.cta }}menu-cta{{ end }}"
@@ -23,6 +24,7 @@
       {{ range . }}
         {{ $classes := slice "menu-item--bottom" }}
         {{ if .Params.cta }}{{ $classes = $classes | append "menu-item--cta" }}{{ end }}
+        {{ if .Params.divider }}{{ $classes = $classes | append "menu-item--divider" }}{{ end }}
         <li itemscope itemtype="http://www.schema.org/SiteNavigationElement" class="{{ delimit $classes " " }}">
           <a
             class="{{ if .Params.cta }}menu-cta{{ end }}"

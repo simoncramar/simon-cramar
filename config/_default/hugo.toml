@@ -54,6 +54,8 @@ title = "Simon Cramar - Photographe et Vidéaste"
     name = "Drone"
     url = "/drone/"
     weight = 10
+    [menu.main.params]
+      divider = true
   [[menu.main]]
     name = "Timelapse"
     url = "/timelapse/"
@@ -64,7 +66,7 @@ title = "Simon Cramar - Photographe et Vidéaste"
     weight = 30
   [[menu.main]]
     name = "Portfolio"
-    url = "/videos/"
+    url = "/portfolio/"
     weight = 40
     [menu.main.params]
       spaced = true

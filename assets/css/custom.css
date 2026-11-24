@@ -312,6 +312,10 @@ body > menu#menu .menu-item--spaced a {
   border-bottom: 0;
 }
 
+body > menu#menu .menu-item--divider > a {
+  border-top: 1px solid var(--border);
+}
+
 body > menu#menu .menu-cta {
   display: inline-flex !important;
   align-items: center;
@@ -324,7 +328,7 @@ body > menu#menu .menu-cta {
   border-bottom: 1px solid var(--text-1) !important;
   background: var(--text-1);
   color: var(--surface-1) !important;
-  font-size: 0.85em;
+  font-size: inherit;
   letter-spacing: 0.06em;
   transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
@@ -339,7 +343,7 @@ body > menu#menu .menu-cta[aria-current="true"] {
 body > menu#menu .menu-item--bottom:not(.menu-item--cta) a {
   border-bottom: 0;
   opacity: 0.72;
-  font-size: 0.85em;
+  font-size: inherit;
 }
 
 body > menu#menu .menu-item--bottom:not(.menu-item--cta) a:hover,
@@ -706,6 +710,11 @@ body > menu#menu .menu-item--bottom:not(.menu-item--cta) a[aria-current="true"] 
 /* Portfolio filters */
 .portfolio {
   padding: 0 0 3rem;
+}
+
+/* Animate content only — keep filter toggle outside any transform
+   (transform on an ancestor breaks position:fixed) */
+.portfolio__main {
   animation: page-panel-in 0.8s ease-out 0.18s both;
 }
 
@@ -1387,7 +1396,7 @@ body:has(.contact-page) > main > .contact-page {
   .expertise-split__aside,
   .expertise-split__media,
   body:has(.portfolio) hgroup,
-  .portfolio,
+  .portfolio__main,
   .contact-page__visual img,
   .contact-page__panel {
     animation: none;

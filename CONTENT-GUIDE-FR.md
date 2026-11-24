@@ -552,7 +552,7 @@ La syntaxe d'intégration vidéo dépend de votre thème Hugo. Consultez la docu
 
 ### Filtres du portfolio (ce site)
 
-Sur ce site, le portfolio est géré dans **`content/videos.md`**. Les filtres (Rôle, Technique, Secteur) sont définis **dans le même fichier**, au début du frontmatter, sous la clé `filters`. Vous n’avez pas besoin d’éditer les templates.
+Sur ce site, le portfolio est géré dans **`content/portfolio.md`**. Les filtres (Rôle, Technique, Secteur) sont définis **dans le même fichier**, au début du frontmatter, sous la clé `filters`. Vous n’avez pas besoin d’éditer les templates.
 
 #### Définir ou renommer un filtre
 

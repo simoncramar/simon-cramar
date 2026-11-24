@@ -11,13 +11,16 @@
   {{ $filterData := partial "portfolio-build-filters.html" . }}
 
   <section class="portfolio" data-portfolio>
-    <div class="portfolio-filters" data-portfolio-filters>
-      {{ partial "portfolio-filters.html" $filterData }}
+    {{/* Animated wrapper only — fixed filter UI must stay outside transforms */}}
+    <div class="portfolio__main">
+      <div class="portfolio-filters" data-portfolio-filters>
+        {{ partial "portfolio-filters.html" $filterData }}
+      </div>
+
+      <p class="portfolio-empty" data-portfolio-empty hidden>Aucune vidéo ne correspond à ce filtre.</p>
+
+      {{ partial "videos-grid.html" (dict "videos" $allVideos "galleryId" "portfolio-gallery") }}
     </div>
-
-    <p class="portfolio-empty" data-portfolio-empty hidden>Aucune vidéo ne correspond à ce filtre.</p>
-
-    {{ partial "videos-grid.html" (dict "videos" $allVideos "galleryId" "portfolio-gallery") }}
 
     <button
       class="filter-toggle"

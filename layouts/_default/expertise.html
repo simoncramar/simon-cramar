@@ -1,7 +1,7 @@
 {{ define "main" }}
   {{ $wantedTechniques := .Params.expertise_roles | default slice }}
   {{ $matched := slice }}
-  {{ with site.GetPage "/videos" }}
+  {{ with site.GetPage "/portfolio" }}
     {{ range .Params.videos }}
       {{ $video := . }}
       {{ $hit := false }}
